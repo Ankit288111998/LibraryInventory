@@ -47,7 +47,7 @@ public class BookController {
 	}
 	
 	@PutMapping("/updatebook/byname")
-	public String updateBookByName(@RequestParam String name, @RequestBody @Valid Book book) {
+	public Book updateBookByName(@RequestParam String name, @RequestBody @Valid Book book) {
 		return bookServiceImpl.updateBookByName(name, book);
 	}
 	
@@ -57,7 +57,7 @@ public class BookController {
 	}
 	
 	@DeleteMapping("/book/byid")
-	public boolean deleteBookById(int id) {
-		return bookServiceImpl.deleteBookById(id);
+	public void deleteBookById(int id) {
+		bookServiceImpl.deleteBookById(id);
 	}
 }

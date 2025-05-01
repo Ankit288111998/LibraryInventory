@@ -14,6 +14,6 @@ public interface BookInterface {
 	Book getBookByName(String name);
 	void saveBook(Book book);
 	boolean deleteBookByName(String bookName);
-	boolean deleteBookById(int id);
-	String updateBookByName(String name, Book book);
+	void deleteBookById(int id);
+	Book updateBookByName(String name, Book book);
 }
