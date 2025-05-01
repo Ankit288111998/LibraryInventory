@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.controller.BookController;
 import com.example.demo.exception.BookNotFoundException;
+import com.example.demo.exception.GlobalExceptionHandler;
 import com.example.demo.model.Book;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.service.BookInterface;
@@ -20,9 +21,15 @@ import jakarta.transaction.Transactional;
 @Service
 public class BookServiceImpl implements BookInterface {
 
+    private final GlobalExceptionHandler globalExceptionHandler;
+
 	
 	@Autowired
 	private BookRepository bookRepository;
+
+    BookServiceImpl(GlobalExceptionHandler globalExceptionHandler) {
+        this.globalExceptionHandler = globalExceptionHandler;
+    }
 
 	@Override
 	public List<Book> getAllBooks() {
@@ -63,7 +70,7 @@ public class BookServiceImpl implements BookInterface {
 	public Book updateBookByName(String name, Book updatedBook) {
 	    Book existingBook = bookRepository.findByBookName(name);
 	    if (existingBook == null) {
-	        throw new RuntimeException("Book not found with name: " + name);
+	        throw new BookNotFoundException("Book not found with name: " + name);
 	    }
 
 	    existingBook.setTitle(updatedBook.getTitle());
