@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Book;
 import com.example.demo.serviceImpl.BookServiceImpl;
 
+import jakarta.validation.Valid;
+
 /**
  * @author ankit 
  */
@@ -25,7 +27,7 @@ public class BookController {
 	private BookServiceImpl bookServiceImpl;
 	
 	@PostMapping("/books")
-	public String saveBook(@RequestBody Book book) {
+	public String saveBook(@RequestBody @Valid Book book) {
 
 		bookServiceImpl.saveBook(book);
 		return "Book saved";
@@ -45,7 +47,7 @@ public class BookController {
 	}
 	
 	@PutMapping("/updatebook/byname")
-	public String updateBookByName(@RequestParam String name, @RequestBody Book book) {
+	public String updateBookByName(@RequestParam String name, @RequestBody @Valid Book book) {
 		return bookServiceImpl.updateBookByName(name, book);
 	}
 	

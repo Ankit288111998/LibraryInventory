@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @author ankit 
@@ -8,9 +10,13 @@ import jakarta.persistence.Entity;
 
 //@Entity -> use this annotation when works with database/jpa/crud repository
 public class Book {
+	@NotEmpty(message = "Book name cannot be null")
 	private String bookName;
+	@NotNull(message = "Book id cannot be null")
 	private int bookId;
+	@NotEmpty(message = "Book title cannot be null")
 	private String title;
+	@NotEmpty(message = "Author name can not be null")
 	private String author;
 	
 	public String getBookName() {
